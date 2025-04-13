@@ -1,0 +1,48 @@
+# ==== Python cache ====
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ==== Virtual environment ====
+venv/
+.env/
+
+# ==== Jupyter notebooks checkpoints ====
+.ipynb_checkpoints/
+
+# ==== VS Code config ====
+.vscode/
+
+# ==== OS files ====
+.DS_Store
+Thumbs.db
+
+# ==== Logs ====
+*.log
+
+# ==== Model files ====
+*.h5
+*.pt
+*.pth
+*.joblib
+*.sav
+
+# ==== Secrets ====
+config.yaml
+.env
+
+# ==== Data files ====
+data/raw/
+data/processed/
+data/external/
+
+# ==== Ignore files from API or downloads ====
+forecast_*.csv
+
+# ==== Others ====
+*.bak
