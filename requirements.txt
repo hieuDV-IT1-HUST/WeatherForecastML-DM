@@ -1,0 +1,14 @@
+torch
+scikit-learn
+pandas
+numpy
+matplotlib
+tqdm
+fastapi
+uvicorn
+pyyaml
+xarray
+cdsapi
+openmeteo-requests
+requests-cache
+retry-requests
