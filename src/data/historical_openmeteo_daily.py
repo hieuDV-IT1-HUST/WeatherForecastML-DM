@@ -22,8 +22,8 @@ url = "https://archive-api.open-meteo.com/v1/archive"
 params = {
     "latitude": weather_cfg["latitude"],
     "longitude": weather_cfg["longitude"],
-    "start_date": "1980-01-01",
-    "end_date": "2020-12-31",
+    "start_date": "2020-12-31",
+    "end_date": "2025-04-20",
     "daily": weather_cfg["daily_fields"],
     "timezone": weather_cfg["timezone"]
 }
@@ -48,6 +48,6 @@ for i, var_name in enumerate(daily_fields):
 # Convert to DataFrame and export
 df = pd.DataFrame(daily_data)
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-file_path = OUTPUT_DIR / f"openmeteo_historical_daily.csv"
+file_path = OUTPUT_DIR / f"openmeteo_historical_daily_2.csv"
 df.to_csv(file_path, index=False, encoding="utf-8")
 print(f"[✅] Saved historical weather data to {file_path}")

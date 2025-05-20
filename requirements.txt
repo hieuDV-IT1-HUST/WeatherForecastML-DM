@@ -12,3 +12,8 @@ cdsapi
 openmeteo-requests
 requests-cache
 retry-requests
+seaborn
+
+boruta
+xgboost
+lightgbm

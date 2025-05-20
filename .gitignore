@@ -9,8 +9,10 @@ build/
 .eggs/
 
 # ==== Virtual environment ====
-venv/
+.venv/
 .env/
+venv/
+env/
 
 # ==== Jupyter notebooks checkpoints ====
 .ipynb_checkpoints/
@@ -39,10 +41,12 @@ config.yaml
 # ==== Data files ====
 data/raw/
 data/processed/
-data/external/
+data/trained_data/
+data/scores&predictions/
 
 # ==== Ignore files from API or downloads ====
 forecast_*.csv
 
 # ==== Others ====
 *.bak
+.cache.sqlite

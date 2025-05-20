@@ -2,15 +2,15 @@ import os
 
 structure = {
     "data": ["raw", "processed", "train", "test", "external"],
-    "notebooks": ["EDA.ipynb", "transformer_test.ipynb"],
+    "notebooks": ["EDA.ipynb", "preprocess.ipynb", "transformer_test.ipynb"],
     "src": {
-        "data": ["fetch_data.py", "preprocess.py", "split_dataset.py"],
+        "data": ["fetch_data_visualcrossing.py", "historical_openmeteo_daily", "historical_openmeteo_hourly", "split_dataset.py"],
         "model": ["transformer.py", "train.py"],
         "predict": ["inference.py"],
         "utils": ["config.py"]
     },
     "api": ["main.py", "routes.py", "model_loader.py"],
-    "models": ["transformer_v1.pt"],
+    "models": [],
     "": ["README.md", "requirements.txt", "config.yaml"]
 }
 
