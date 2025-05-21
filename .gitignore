@@ -50,3 +50,5 @@ forecast_*.csv
 # ==== Others ====
 *.bak
 .cache.sqlite
+*.sqlite
+*.sqlite3

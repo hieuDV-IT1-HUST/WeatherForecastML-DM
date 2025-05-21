@@ -3,8 +3,8 @@ import numpy as np
 from pathlib import Path
 
 def save_model_scores(model_name: str, mae: float, rmse: float, r2: float,
-                      cv_rmse_mean: float, cv_rmse_std: float,
-                      save_dir: Path):
+                      cv_rmse_mean: float, cv_rmse_std: float, cv_mae_mean: float, cv_mae_std: float,
+                      cv_r2_mean: float, cv_r2_std: float, save_dir: Path):
     """Save model scores to model_scores.csv"""
     if not save_dir.exists():
         save_dir.mkdir(parents=True, exist_ok=True)
@@ -16,7 +16,11 @@ def save_model_scores(model_name: str, mae: float, rmse: float, r2: float,
         "rmse": rmse,
         "r2": r2,
         "cv_rmse_mean": cv_rmse_mean,
-        "cv_rmse_std": cv_rmse_std
+        "cv_rmse_std": cv_rmse_std,
+        "cv_mae_mean": cv_mae_mean,
+        "cv_mae_std": cv_mae_std,
+        "cv_r2_mean": cv_r2_mean,
+        "cv_r2_std": cv_r2_std
     }])
 
     if scores_path.exists():

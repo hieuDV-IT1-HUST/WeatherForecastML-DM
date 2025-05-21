@@ -22,8 +22,8 @@ def load_preprocessed_data(target_variable: str, config_path="../../config.yaml"
         "TRAINED_DATA": trained_data_dir,
         "METHOD": method,
         "selected_features": json.load(open(target_variable_dir / "selected_features.json")),
-        "X_train_selected": joblib.load(target_variable_dir / "X_train_selected.pkl"),
-        "X_test_selected": joblib.load(target_variable_dir / "X_test_selected.pkl"),
+        "X_train": joblib.load(target_variable_dir / "X_train.pkl"),
+        "X_test": joblib.load(target_variable_dir / "X_test.pkl"),
         "y_train": joblib.load(target_variable_dir / "y_train.pkl"),
         "y_test": joblib.load(target_variable_dir / "y_test.pkl"),
         "preprocessor": joblib.load(target_variable_dir / "preprocessor.pkl")
