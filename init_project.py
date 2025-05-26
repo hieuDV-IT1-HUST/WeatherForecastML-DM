@@ -1,17 +1,19 @@
 import os
 
 structure = {
-    "data": ["raw", "processed", "train", "test", "external"],
-    "notebooks": ["EDA.ipynb", "preprocess.ipynb", "transformer_test.ipynb"],
+    "data": ["raw", "processed", "trained_data", "scores&predictions"],
+    "notebooks": {
+        "EDA": ["EDA.ipynb", "EDA_daily.ipynb"],
+        "models": ["FeaturesFilter.ipynb", "LinearRegression.ipynb"],
+        "pre_process":["preprocess.ipynb", "preprocess_daily.ipynb"]
+    },
     "src": {
-        "data": ["fetch_data_visualcrossing.py", "historical_openmeteo_daily", "historical_openmeteo_hourly", "split_dataset.py"],
-        "model": ["transformer.py", "train.py"],
-        "predict": ["inference.py"],
-        "utils": ["config.py"]
+        "data": ["fetch_data_visualcrossing.py", "historical_openmeteo_daily", "historical_openmeteo_hourly",
+                 "merge_hourly_data.py", "save_results.py"],
+        "utils": ["config.py", "data_loader.py"]
     },
     "api": ["main.py", "routes.py", "model_loader.py"],
-    "models": [],
-    "": ["README.md", "requirements.txt", "config.yaml"]
+    "": ["README.md", ".gitignore", "requirements.txt", "config.yaml"]
 }
 
 def create_structure(base_path="."):
