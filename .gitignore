@@ -20,6 +20,9 @@ env/
 # ==== VS Code config ====
 .vscode/
 
+# ==== IntelliJ config ====
+.idea/
+
 # ==== OS files ====
 .DS_Store
 Thumbs.db

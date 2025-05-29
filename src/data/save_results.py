@@ -34,6 +34,8 @@ def save_model_scores(model_name: str, mae: float, rmse: float, r2: float,
 
 def save_model_predictions(model_name: str, y_true: pd.Series, y_pred: np.ndarray, save_dir: Path):
     """Save model predictions to model_predictions.csv"""
+    if not save_dir.exists():
+        save_dir.mkdir(parents=True, exist_ok=True)
     preds_path = save_dir / "model_predictions.csv"
 
     pred_df = pd.DataFrame({

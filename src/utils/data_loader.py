@@ -5,17 +5,19 @@ import joblib
 import json
 from src.utils.config import load_config
 
-def load_preprocessed_data(target_variable: str, config_path="../../config.yaml"):
+def load_preprocessed_data(method="Hourly", target_variable="", config_path="../../config.yaml"):
     """Load preprocessed data and pipeline components based on config."""
     
     config = load_config(config_path)
     
     root = Path(os.getcwd()).resolve().parent.parent
-    method = config["method"]
     
     data_dir = root / "data"
     trained_data_dir = data_dir / "trained_data"
-    target_variable_dir = trained_data_dir / method / target_variable
+    if target_variable != "":
+        target_variable_dir = trained_data_dir / method / target_variable
+    else:
+        target_variable_dir = trained_data_dir / method
     data = {
         "ROOT": root,
         "DATA": data_dir,
