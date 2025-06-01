@@ -1,34 +1,75 @@
+from typing import Literal
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
-def save_model_scores(model_name: str, mae: float, rmse: float, r2: float,
-                      cv_rmse_mean: float, cv_rmse_std: float, cv_mae_mean: float, cv_mae_std: float,
-                      cv_r2_mean: float, cv_r2_std: float, save_dir: Path):
-    """Save model scores to model_scores.csv"""
+import pandas as pd
+from pathlib import Path
+
+def save_model_scores(model_name: str, save_dir: Path,
+                      mae: float | None = None, rmse: float | None = None, r2: float | None = None,
+                      cv_rmse_mean: float | None = None, cv_rmse_std: float | None = None,
+                      cv_mae_mean: float | None = None, cv_mae_std: float | None = None,
+                      cv_r2_mean: float | None = None, cv_r2_std: float | None = None,
+                      category: Literal["classifier", "regressor"] = "regressor",
+                      accuracy: float | None = None, f1: float | None = None, roc_auc: float | None = None,
+                      cv_accuracy_mean: float | None = None, cv_accuracy_std: float | None = None,
+                      cv_f1_mean: float | None = None, cv_f1_std: float | None = None,
+                      cv_roc_auc_mean: float | None = None, cv_roc_auc_std: float | None = None
+                      ):
+    """Save model scores to model_scores.csv without overwriting non-None values with None"""
+
     if not save_dir.exists():
         save_dir.mkdir(parents=True, exist_ok=True)
     scores_path = save_dir / "model_scores.csv"
 
-    score_row = pd.DataFrame([{
-        "model": model_name,
-        "mae": mae,
-        "rmse": rmse,
-        "r2": r2,
-        "cv_rmse_mean": cv_rmse_mean,
-        "cv_rmse_std": cv_rmse_std,
-        "cv_mae_mean": cv_mae_mean,
-        "cv_mae_std": cv_mae_std,
-        "cv_r2_mean": cv_r2_mean,
-        "cv_r2_std": cv_r2_std
-    }])
+    if category == "regressor":
+        current_scores = {
+            "model": model_name,
+            "mae": mae,
+            "rmse": rmse,
+            "r2": r2,
+            "cv_rmse_mean": cv_rmse_mean,
+            "cv_rmse_std": cv_rmse_std,
+            "cv_mae_mean": cv_mae_mean,
+            "cv_mae_std": cv_mae_std,
+            "cv_r2_mean": cv_r2_mean,
+            "cv_r2_std": cv_r2_std
+        }
+    else:
+        current_scores = {
+            "model": model_name,
+            "accuracy": accuracy,
+            "f1": f1,
+            "roc_auc": roc_auc,
+            "cv_accuracy_mean": cv_accuracy_mean,
+            "cv_accuracy_std": cv_accuracy_std,
+            "cv_f1_mean": cv_f1_mean,
+            "cv_f1_std": cv_f1_std,
+            "cv_roc_auc_mean": cv_roc_auc_mean,
+            "cv_roc_auc_std": cv_roc_auc_std,
+        }
+    # Prepare current update
 
     if scores_path.exists():
         prev_scores = pd.read_csv(scores_path)
-        prev_scores = prev_scores[prev_scores["model"] != model_name]
-        scores_df = pd.concat([prev_scores, score_row], ignore_index=True)
+
+        if model_name in prev_scores["model"].values:
+            # Update only the fields with non-None values
+            idx = prev_scores[prev_scores["model"] == model_name].index[0]
+            for key, value in current_scores.items():
+                if key == "model":
+                    continue
+                if value is not None:
+                    prev_scores.at[idx, key] = value
+            scores_df = prev_scores
+        else:
+            # Append new model
+            score_row = pd.DataFrame([current_scores])
+            scores_df = pd.concat([prev_scores, score_row], ignore_index=True)
     else:
-        scores_df = score_row
+        # Create new file with the row
+        scores_df = pd.DataFrame([current_scores])
 
     scores_df.to_csv(scores_path, index=False)
 
@@ -58,8 +99,3 @@ def save_model_predictions(model_name: str, y_true: pd.Series, y_pred: np.ndarra
         preds_df = pred_df
 
     preds_df.to_csv(preds_path, index=False)
-
-# Example usage in notebook:
-# from src.data.save_results import save_model_scores, save_model_predictions
-# save_model_scores("LGBMR", mae, rmse, r2, -np.mean(cv_scores), np.std(cv_scores), TRAINED_DATA / METHOD)
-# save_model_predictions("LGBMR", y_test, y_pred_lbgmr, TRAINED_DATA / METHOD)

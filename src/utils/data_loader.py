@@ -1,14 +1,10 @@
 import os
 from pathlib import Path
-import pandas as pd
 import joblib
 import json
-from src.utils.config import load_config
 
-def load_preprocessed_data(method="Hourly", target_variable="", config_path="../../config.yaml"):
+def load_preprocessed_data(method="SingleOutput", target_variable=""):
     """Load preprocessed data and pipeline components based on config."""
-    
-    config = load_config(config_path)
     
     root = Path(os.getcwd()).resolve().parent.parent
     

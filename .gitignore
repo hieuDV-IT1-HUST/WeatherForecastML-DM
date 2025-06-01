@@ -46,6 +46,8 @@ data/raw/
 data/processed/
 data/trained_data/
 data/scores&predictions/
+data/models/
+merge_csv.py
 
 # ==== Ignore files from API or downloads ====
 forecast_*.csv
