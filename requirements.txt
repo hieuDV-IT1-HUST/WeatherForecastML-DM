@@ -20,4 +20,5 @@ lightgbm~=4.6.0
 requests~=2.32.3
 openmeteo_requests~=1.4.0
 joblib~=1.4.2
-statemodels
+statsmodels
+dataframe-image

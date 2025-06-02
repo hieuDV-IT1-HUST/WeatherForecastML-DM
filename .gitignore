@@ -42,11 +42,7 @@ config.yaml
 .env
 
 # ==== Data files ====
-data/raw/
-data/processed/
-data/trained_data/
-data/scores&predictions/
-data/models/
+data/
 merge_csv.py
 
 # ==== Ignore files from API or downloads ====
@@ -57,3 +53,4 @@ forecast_*.csv
 .cache.sqlite
 *.sqlite
 *.sqlite3
+*.png
